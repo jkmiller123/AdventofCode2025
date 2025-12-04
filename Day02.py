@@ -1,11 +1,15 @@
+#  Day 2 Puzzle
+# Your job is to find all of the invalid IDs that appear in the given ranges.
+# Part 1 :
+#     invalid IDs by looking for any ID which is made only of some sequence of digits repeated twice.
+#     So, 55 (5 twice), 6464 (64 twice), and 123123 (123 twice) would all be invalid IDs
+# Part 2:
+#      made only of some sequence of digits repeated at least twice
 
 testing = False   # used for debugging messages and to pick the file
-stage_2 = True    # used for more complex coding changes
+stage_2 = False    # used for more complex coding changes
 aocDay = '02'
 file2read = 'Data/Day'+aocDay+'_Sample.txt' if testing else 'Data/Day'+aocDay+'_01.txt'
-pos = 50   # The dial starts by pointing at 50
-goalPos = 0  # the number of times the dial is left pointing at 0 after any rotation in the sequence
-loopCounter = 0  # number of times past the position
 
 from read_files import read_parse_comma
 
@@ -26,9 +30,10 @@ def part_01(data_list):
                 rightside = lowstring[middle:]
                 if leftside == rightside:
                     sum_invalids += lowrange
-                    print(f'Found invalid {lowrange}')
+                    if testing:
+                        print(f'Found invalid {lowrange}')
             lowrange += 1
-    print(f'Total Invalids {sum_invalids}')
+    print(f'Total Invalids for Part 1 {sum_invalids}')
 
 def find_factors(number: object) -> object:
     """
@@ -64,12 +69,9 @@ def part_02(data_list):
         for invalids in list_of_invalids:
             sum_invalids += int(invalids)
 
-        print(f'List of invalids {list_of_invalids} for {items}')
-    print(f'Total of invalids {sum_invalids}')
-
-    4174379265
-    4174823709
-
+        if testing:
+            print(f'List of invalids {list_of_invalids} for {items}')
+    print(f'Total of invalids for Part 2 {sum_invalids}')
 
 data_list = read_parse_comma(a_file=file2read)
 
