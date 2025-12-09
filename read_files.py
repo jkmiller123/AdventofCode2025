@@ -97,7 +97,47 @@ def get_dict(a_file):
         data.update({items : 1})
     return data
 
+def get_3d_map(a_file):
+    # this will create a list of lists.  not exactly what I was looking for.
+    # prefer to make an array with definite co-ordinates.
+    # Sample data
+    # 162,817,812
+    # 57,618,57
+    # 906,360,560
+    # 592,479,940
+    # Returns :
+    # {817, 162, 812}
+    # {57, 618, 57}
+    # {360, 906, 560}
 
+    with open(a_file,'r') as f:
+        data2 = f.read().strip().splitlines()
+    data3 = []
+    for items in data2:
+        newset = list(map(int,items.split(",")))
+        data3.append(newset)
+    return data3
+
+def get_3d_set(a_file):
+    # this will create a list of lists.  not exactly what I was looking for.
+    # prefer to make an array with definite co-ordinates.
+    # Sample data
+    # 162,817,812
+    # 57,618,57
+    # 906,360,560
+    # 592,479,940
+    # Returns :
+    # {817, 162, 812}
+    # {57, 618, 57}
+    # {360, 906, 560}
+
+    with open(a_file,'r') as f:
+        data2 = f.read().strip().splitlines()
+    data3 = []
+    for items in data2:
+        newset = tuple(map(int,items.split(",")))
+        data3.append(newset)
+    return data3
 def read_parse_colon(a_file):
     with open(a_file,'r') as f:
         data = f.read().strip().splitlines()
@@ -116,4 +156,30 @@ def read_parse_comma(a_file):
     with open(a_file,'r') as f:
         data = f.read().strip().split(',')
     return data
-    
+
+
+def create_base_files(aocDay):
+    # Simple little function that will create the 3 standard files along with the standard heading
+    # in the python file
+
+    samplefile = 'Data/Day' + aocDay + '_Sample.txt'
+    datafile = 'Data/Day' + aocDay + '_01.txt'
+    pythonfile = 'Day' + aocDay + '.py'
+
+    with open(samplefile, "w") as f:
+        f.write("")
+        f.close()
+
+    with open(datafile, "w") as f:
+        f.write("")
+        f.close()
+
+    with open(pythonfile, "w") as p:
+        p.write("testing = True # used for debugging messages and to pick the file\n")
+        p.write("stage_2 = False  # used for more complex coding changes\n")
+        p.write("aocDay = '"+aocDay+"'\n")
+        p.write("file2read = 'Data/Day' + aocDay + '_Sample.txt' if testing else 'Data/Day' + aocDay + '_01.txt'\n")
+        p.write("\n")
+        p.write("from read_files import get_1line\n")
+        p.close()
+    return
